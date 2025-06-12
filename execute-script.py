@@ -1,12 +1,15 @@
+from dotenv import load_dotenv
+import os
 import psycopg2
 
-# Executados: 7021, 7028, 7023, 7030, 7006, 7003, 7008, 7011
+load_dotenv()
 
-# Pendente: 7005
+user = os.getenv("DB_USER")
+password = os.getenv("DB_PASSWORD")
+host = os.getenv("DB_HOST")
+database = os.getenv("DB_NAME")
 
-ports = []
-user = "pedro.andrade"
-password = "xGyBlEU6cdC3y5PIw1iFbh0qEkcla8R2"
+ports = [5432]
 
 with open("execute.sql", "r", encoding="UTF-8") as file:
         sql = file.read()
@@ -15,11 +18,11 @@ for port in ports:
     try:
         print(f"\n Conectando na porta {port}.")
         connection = psycopg2.connect(
-            host="127.0.0.1",
-            port=port,
-            database="siscobraweb",
-            user=user,
-            password=password,
+            host = host,
+            port = port,
+            database = database,
+            user = user,
+            password = password,
             connect_timeout = 15
         )
 
