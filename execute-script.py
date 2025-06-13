@@ -1,6 +1,6 @@
-from dotenv import load_dotenv
 import os
 import psycopg2
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -9,21 +9,21 @@ password = os.getenv("DB_PASSWORD")
 host = os.getenv("DB_HOST")
 database = os.getenv("DB_NAME")
 
-ports = [5432]
+ports = []
 
 with open("execute.sql", "r", encoding="UTF-8") as file:
         sql = file.read()
 
 for port in ports:
     try:
-        print(f"\n Conectando na porta {port}.")
+        print(f"\n Connecting at port {port}.")
         connection = psycopg2.connect(
             host = host,
             port = port,
             database = database,
             user = user,
             password = password,
-            connect_timeout = 15
+            connect_timeout = 10
         )
 
         cursor = connection.cursor()
@@ -33,4 +33,4 @@ for port in ports:
         cursor.close()
         connection.close()
     except Exception as e:
-        print(f"A conexao falhou: {e}")
+        print(f"Connection fail, error: {e}")
