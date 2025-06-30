@@ -11,7 +11,7 @@ database = os.getenv("DB_NAME")
 
 ports = []
 
-with open("execute.sql", "r", encoding="UTF-8") as file:
+with open("./sql/execute.sql", "r", encoding="UTF-8") as file:
         sql = file.read()
 
 for port in ports:
